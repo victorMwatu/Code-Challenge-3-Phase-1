@@ -1,0 +1,10 @@
+{
+  "posts": [
+    { "id": 1,
+      "text": "Hello World!",
+      "name": "John Smith" },
+    { "id": 2,
+      "text": "I for one, welcome.",
+      "name": "Jane Doe" }
+  ]
+}
