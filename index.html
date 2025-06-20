@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Pulse</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Post Pulse</h1>
+            <p>Modern Blog Post Management</p>
+        </header>
+        <main class="main-content">
+            <aside class="sidebar">
+                <h2>Blog Posts</h2>
+                <div class="post-count">2 Posts</div>
+                <ul class="post-list">
+                    <li class="post-item active" onclick="selectPost(this, 'Getting Started with React', 'Sarah Johnson', '2024-01-15')">
+                        <div class="post-title">Getting Started with React</div>
+                        <div class="post-meta">Sarah Johnson • 2024-01-15</div>
+                    </li>
+                </ul>
+                <div class="add-post-section">
+                    <button class="add-post-btn"><span class="icon">+</span> Add New Post</button>
+                    <form class="add-post-form" id="addPostForm">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Post title..." id="postTitle">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Author name..." id="postAuthor">
+                        </div>
+                        <div class="form-group">
+                            <input type="url" class="form-input" placeholder="Image URL..." id="postImage">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-input form-textarea" placeholder="Write your post content..." id="postContent"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary" onclick="addPost()">
+                                <span class="icon">+</span>
+                                Add Post
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="cancelAdd()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </aside>
+        
+            <section class="content-area">
+                <div class="content-header">
+                    <div>
+                        <h1 class="content-title" id="currentTitle">Getting Started with React</h1>
+                        <div class="content-meta" id="currentMeta">By Sarah Johnson • 2024-01-15</div>
+                    </div>
+                    <div class="content-actions">
+                        <button class="action-btn">
+                            <!-- button icon generated from online AI -->
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                            Edit
+                        </button>
+                        <button class="action-btn" style="color: #dc3545;">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Blog post image" class="content-image" id="currentImage">
+                    
+                <div class="content-body" id="currentContent">
+                    Nothing
+                </div>
+
+                <form id="edit-post-form" class="hidden"> <!-- Add 'hidden' class by default -->
+                        <h4>Update Post Details</h4>
+                        <div class="form-group">
+                        <label for="edit-title">Title:</label>
+                        <input type="text" name="title" id="edit-title" class="form-input">
+                        </div>
+                        <div class="form-group">
+                        <label for="edit-content">Content:</label>
+                        <textarea name="content" id="edit-content" rows="5" class="form-input"></textarea>
+                        </div>
+                        <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Update Post</button>
+                        <button type="button" id="cancel-edit" class="btn btn-secondary">Cancel</button>
+                        </div>
+                </form>    
+            </section>
+        </main>
+    </div>
+    <script src="src/index.js"></script>
+</body>
+</html>
