@@ -271,12 +271,12 @@
             color: #666; /* Medium gray text */
         }
 
-        .hidden{
+        .edit-form{
           display: none; /* Hidden by default, the edit form */
           padding: 0 24px 24px; /* Horizontal and bottom padding */
         }
         
-        .hidden.active {
+        .edit-form.active {
           display: block; /* Shown when active class is added */
         }
 
