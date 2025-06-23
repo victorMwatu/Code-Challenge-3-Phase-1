@@ -20,6 +20,7 @@ cancelEditPostButton.addEventListener('click', cancelEditPost);
 postList.addEventListener('click', handlePostClick);
 cancelAddPost.addEventListener('click', handleCancelAddPost);
 deleteCurrentPost.addEventListener('click', deletePost);
+editPostForm.addEventListener('submit', editPost);
 //Main function that runs on page load
 document.addEventListener('DOMContentLoaded', main);
 function main() {
@@ -85,7 +86,6 @@ function handlePostClick(e) {
     .then(response => response.json())
     .then( data => {
         const p = data.find( post => post.postTitle === postName);
-        console.log(p);
         currentContent.innerText = p.post;
         currentImage.src = p.imageUrl;
         currentTitle.innerText = p.postTitle;
@@ -135,28 +135,35 @@ function setCurrentContent(postId = 0) {
     })
     .catch(error => currentContent.innerText = `Error: ${error}`);
 }
-// function editPost() {
-//      fetch('http://localhost:3000/posts')
-//         .then(response => response.json())
-//         .then( data => {
-//             const current = data.find( post => post.postTitle === currentTitle.innerText);
-//             fetch(`http://localhost:3000/posts/${current['id']}`,{
-//                 method: 'PATCH',
-//                 headers: {
-//                     'Content-Type':'application/json'
-//                 }
-//             })   
-//             .then(response => response.json())
-//             .then(data => {console.log(`deleted ${data}`)}
-//             );
-//              postList.innerHTML = "";
-//             currentContent.innerHTML = "";
-//             currentImage.innerHTML = "";
-//             setCurrentContent();
-//             displayPosts();
-//         })
-//         .catch(error => console.log(error));
-// }    
+function editPost(e) {
+    e.preventDefault();
+     fetch('http://localhost:3000/posts')
+        .then(response => response.json())
+        .then( data => {
+            const current = data.find( post => post.postTitle === currentTitle.innerText);
+            
+            const formData = new FormData(e.target);
+            const newData = Object.fromEntries(formData.entries());
+            const updatedData = {postTitle: newData.postTitle,
+                                 post: newData.post
+                                }
+            fetch(`http://localhost:3000/posts/${current['id']}`,{
+                method: 'PATCH',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            })   
+            .then(response => response.json())
+            .then(data => console.log(`update ${data}`));
+        
+             postList.innerHTML = "";
+            
+            setCurrentContent();
+            displayPosts();
+            cancelEditPost();
+        });
+}    
 
 
 function deletePost() {
@@ -176,7 +183,7 @@ function deletePost() {
             .then(response => response.json())
             .then(data => {console.log(`deleted ${data}`)}
             );
-             postList.innerHTML = "";
+            postList.innerHTML = "";
             currentContent.innerHTML = "";
             currentImage.innerHTML = "";
             setCurrentContent();
