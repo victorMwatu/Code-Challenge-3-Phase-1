@@ -15,34 +15,30 @@
         <main class="main-content">
             <aside class="sidebar">
                 <h2>Blog Posts</h2>
-                <div class="post-count">2 Posts</div>
-                <ul class="post-list">
-                    <li class="post-item active" onclick="selectPost(this, 'Getting Started with React', 'Sarah Johnson', '2024-01-15')">
-                        <div class="post-title">Getting Started with React</div>
-                        <div class="post-meta">Sarah Johnson • 2024-01-15</div>
-                    </li>
+                <div class="post-count" id="postCount"></div>
+                <ul class="post-list" id="postList">
                 </ul>
                 <div class="add-post-section">
                     <button class="add-post-btn"><span class="icon">+</span> Add New Post</button>
                     <form class="add-post-form" id="addPostForm">
                         <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Post title..." id="postTitle">
+                            <input type="text" class="form-input" name="postTitle" placeholder="Post title..." id="postTitle">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Author name..." id="postAuthor">
+                            <input type="text" class="form-input" name="author" placeholder="Author name..." id="postAuthor">
                         </div>
                         <div class="form-group">
-                            <input type="url" class="form-input" placeholder="Image URL..." id="postImage">
+                            <input type="url" class="form-input" name="imageUrl" placeholder="Image URL..." id="postImage">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-input form-textarea" placeholder="Write your post content..." id="postContent"></textarea>
+                            <textarea class="form-input form-textarea" name="post" placeholder="Write your post content..." id="postContent"></textarea>
                         </div>
                         <div class="form-actions">
-                            <button type="button" class="btn btn-primary" onclick="addPost()">
+                            <button type="submit" class="btn btn-primary" >
                                 <span class="icon">+</span>
                                 Add Post
                             </button>
-                            <button type="button" class="btn btn-secondary" onclick="cancelAdd()">Cancel</button>
+                            <button type="button" class="btn btn-secondary" id="cancelAddPost">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -71,7 +67,7 @@
                     </div>
                 </div>
                 
-                <img src="img1.jpeg" alt="Blog post image" class="content-image" id="currentImage">
+                <img src="/images/img1.jpeg" alt="Blog post image" class="content-image" id="currentImage">
                     
                 <div class="content-body" id="currentContent">
                     Nothing
