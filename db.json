@@ -1,14 +1,6 @@
 {
   "posts": [
     {
-      "id": "1",
-      "postTitle": "Getting Started with React",
-      "author": "Sarah Johnson",
-      "imageUrl": "/images/img1.jpeg",
-      "post": "Nothing at all. We're just getting started",
-      "date": "2025-06-22"
-    },
-    {
       "id": "2",
       "postTitle": "Long Assignments Back-to-Back",
       "author": "Beatrice Amstrong",
@@ -38,14 +30,6 @@
       "author": "All Of Us",
       "imageUrl": "http://localhost:5500/images/robotTyping.jpeg",
       "post": "If I knew this at the beginning of this course I would have bought a cow, much better if I am to be replaced anyway.",
-      "date": "2025-06-23"
-    },
-    {
-      "id": "1a78",
-      "postTitle": "what is this",
-      "author": "this is ",
-      "imageUrl": "",
-      "post": "lfjsldfjljfaskfj lk falskfj ldf aslkf ",
       "date": "2025-06-23"
     }
   ]

@@ -11,6 +11,7 @@ const currentImage = document.getElementById('currentImage');
 const currentTitle = document.getElementById('currentTitle');
 const currentMeta = document.getElementById('currentMeta');
 const cancelAddPost = document.getElementById('cancelAddPost');
+const deleteCurrentPost = document.getElementById('deleteCurrentPost');
 //Event listeners 
 addPostForm.addEventListener('submit', addNewPostListener);
 addNewPostButton.addEventListener('click', addPostFormToggle);
@@ -18,11 +19,13 @@ editPostButton.addEventListener('click', editPostFormToggle);
 cancelEditPostButton.addEventListener('click', cancelEditPost);
 postList.addEventListener('click', handlePostClick);
 cancelAddPost.addEventListener('click', handleCancelAddPost);
+deleteCurrentPost.addEventListener('click', deletePost);
 //Main function that runs on page load
 document.addEventListener('DOMContentLoaded', main);
 function main() {
     displayPosts();
     showPostCount();
+    setCurrentContent();
 }
 
  
@@ -107,13 +110,79 @@ function addNewPostListener(e) {
     .then(res => res.json())
     .then(post => {
         console.log('Post added:', post);
+        postList.innerHTML = "";
+        displayPosts();
         addPostForm.reset();
+        addPostForm.classList.toggle('active');
     })
     .catch(err => console.error('Error:', err));
-    postList.innerHTML = "";
-    displayPosts();
+    
 }
+//Cancel adding new post 
 function handleCancelAddPost() {
     addPostForm.reset();
     addPostFormToggle();
 }
+function setCurrentContent(postId = 0) {
+    fetch('http://localhost:3000/posts')
+    .then(response => response.json())
+    .then( data => {
+        const p = data[postId];
+        currentContent.innerText = p.post;
+        currentImage.src = p.imageUrl;
+        currentTitle.innerText = p.postTitle;
+        currentMeta.innerText = `${p['author']} • ${p['date']}`;
+    })
+    .catch(error => currentContent.innerText = `Error: ${error}`);
+}
+// function editPost() {
+//      fetch('http://localhost:3000/posts')
+//         .then(response => response.json())
+//         .then( data => {
+//             const current = data.find( post => post.postTitle === currentTitle.innerText);
+//             fetch(`http://localhost:3000/posts/${current['id']}`,{
+//                 method: 'PATCH',
+//                 headers: {
+//                     'Content-Type':'application/json'
+//                 }
+//             })   
+//             .then(response => response.json())
+//             .then(data => {console.log(`deleted ${data}`)}
+//             );
+//              postList.innerHTML = "";
+//             currentContent.innerHTML = "";
+//             currentImage.innerHTML = "";
+//             setCurrentContent();
+//             displayPosts();
+//         })
+//         .catch(error => console.log(error));
+// }    
+
+
+function deletePost() {
+    const sureness = confirm('Are you sure you want to delete the post? The post will be removed permanently from the database');
+    if (sureness) {
+        fetch('http://localhost:3000/posts')
+        .then(response => response.json())
+        .then( data => {
+            const current = data.find( post => post.postTitle === currentTitle.innerText);
+            console.log(current);
+            fetch(`http://localhost:3000/posts/${current['id']}`,{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type':'application/json'
+                }
+            })   
+            .then(response => response.json())
+            .then(data => {console.log(`deleted ${data}`)}
+            );
+             postList.innerHTML = "";
+            currentContent.innerHTML = "";
+            currentImage.innerHTML = "";
+            setCurrentContent();
+            displayPosts();
+        })
+        .catch(error => console.log(error));
+    }    
+}
+
